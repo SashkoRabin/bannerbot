@@ -12,6 +12,7 @@ import {
 import styles from './App.module.css';
 
 export default function App() {
+  // URL бэкенда (Render)
   const BACKEND_URL = 'https://bannerbot-7le0.onrender.com';
 
   const [formData, setFormData] = useState({
@@ -30,6 +31,7 @@ export default function App() {
     if (name === 'phone') {
       const numbers = value.replace(/\D/g, '');
       let formatted = '';
+
       if (numbers.length > 0) {
         formatted = '+' + numbers.substring(0, 1);
         if (numbers.length > 1) formatted += ' (' + numbers.substring(1, 4);
@@ -37,6 +39,7 @@ export default function App() {
         if (numbers.length >= 7) formatted += '-' + numbers.substring(7, 9);
         if (numbers.length >= 9) formatted += '-' + numbers.substring(9, 11);
       }
+
       setFormData((prev) => ({ ...prev, phone: formatted }));
     } else if (name === 'inn') {
       // описание ситуации
@@ -57,12 +60,16 @@ export default function App() {
     if (formData.phone.replace(/\D/g, '').length < 11) {
       return 'Пожалуйста, введите корректный номер телефона.';
     }
+    if (!formData.inn.trim()) {
+      return 'Пожалуйста, кратко опишите вашу ситуацию.';
+    }
     return '';
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const error = validateForm();
+
     if (error) {
       setFormError(error);
       return;
@@ -127,8 +134,9 @@ export default function App() {
 
             <p className={styles.heroSubtitle}>
               Помогаю защищать права и интересы в сложных жизненных ситуациях:
-              проблемы военнослужащих, споры с работодателем, семейные конфликты, долги, уголовные
-              дела. Персональный подход и максимальная конфиденциальность.
+              проблемы военнослужащих, споры с работодателем, семейные конфликты,
+              долги, уголовные дела. Персональный подход и максимальная
+              конфиденциальность.
             </p>
 
             <div className={styles.heroActions}>
@@ -159,7 +167,11 @@ export default function App() {
               <div className={styles.heroCardHeader}>
                 <div className={styles.heroAvatar}>
                   <div className={styles.heroAvatarInitials}>
-                    <img className={styles.heroImg} src="https://static8.depositphotos.com/1002026/936/i/450/depositphotos_9365427-stock-photo-lawyer-on-his-workplace.jpg" alt='' />
+                    <img
+                      className={styles.heroImg}
+                      src="https://static8.depositphotos.com/1002026/936/i/450/depositphotos_9365427-stock-photo-lawyer-on-his-workplace.jpg"
+                      alt="Блинов Михаил Сергеевич"
+                    />
                   </div>
                 </div>
                 <div>
@@ -171,9 +183,7 @@ export default function App() {
               <div className={styles.heroCardBody}>
                 <div className={styles.heroStatRow}>
                   <div>
-                    <div className={styles.heroStatLabel}>
-                      Основные направления
-                    </div>
+                    <div className={styles.heroStatLabel}>Основные направления</div>
                     <div className={styles.heroStatValue}>
                       Трудовые, военные, семейные, гражданские, уголовные дела
                     </div>
@@ -187,7 +197,9 @@ export default function App() {
                   </div>
                   <div className={styles.heroStat}>
                     <div className={styles.heroStatNumber}>87%</div>
-                    <div className={styles.heroStatText}>дел с положительным результатом*</div>
+                    <div className={styles.heroStatText}>
+                      дел с положительным результатом*
+                    </div>
                   </div>
                   <div className={styles.heroStat}>
                     <div className={styles.heroStatNumber}>24/7</div>
@@ -302,7 +314,9 @@ export default function App() {
                   <PhoneCall className={styles.contactIcon} />
                   <div>
                     <div className={styles.contactLabel}>Телефон</div>
-                    <div className={styles.contactValue}>по запросу после заявки</div>
+                    <div className={styles.contactValue}>
+                      по запросу после заявки
+                    </div>
                   </div>
                 </div>
 
@@ -353,6 +367,7 @@ export default function App() {
                       onChange={handleChange}
                       placeholder="Иванов Иван Иванович"
                       className={styles.input}
+                      autoComplete="name"
                     />
                   </div>
 
@@ -367,6 +382,7 @@ export default function App() {
                       onChange={handleChange}
                       placeholder="+7 (___) ___-__-__"
                       className={styles.input}
+                      autoComplete="tel"
                     />
                   </div>
 

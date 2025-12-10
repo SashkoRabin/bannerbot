@@ -109,7 +109,7 @@ body {
   position: relative;
   z-index: 1;
   min-height: 100vh;
-  padding: 32px 16px 32px;
+  padding: 24px 14px 28px;
   max-width: 1120px;
   margin: 0 auto;
 }
@@ -134,9 +134,9 @@ body {
 .hero {
   display: grid;
   grid-template-columns: minmax(0, 1.4fr);
-  gap: 28px;
+  gap: 24px;
   align-items: center;
-  margin-bottom: 48px;
+  margin-bottom: 40px;
 }
 
 @media (min-width: 960px) {
@@ -162,10 +162,10 @@ body {
     rgba(15, 23, 42, 0.85);
   backdrop-filter: blur(20px);
   color: #e5e7eb;
-  font-size: 12px;
+  font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  margin-bottom: 18px;
+  margin-bottom: 14px;
 }
 
 .heroBadgeDot {
@@ -177,9 +177,9 @@ body {
 }
 
 .heroTitle {
-  margin: 0 0 14px;
-  font-size: 36px;
-  line-height: 1.1;
+  margin: 0 0 10px;
+  font-size: 30px;
+  line-height: 1.2;
   letter-spacing: -0.04em;
   color: #f9fafb;
 }
@@ -200,7 +200,7 @@ body {
 
 .heroSubtitle {
   margin: 0 0 10px;
-  font-size: 15px;
+  font-size: 14px;
   line-height: 1.7;
   color: var(--text-muted);
 }
@@ -208,7 +208,8 @@ body {
 .heroActions {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 12px;
+  margin-top: 6px;
 }
 
 @media (min-width: 600px) {
@@ -226,7 +227,7 @@ body {
   align-items: center;
   justify-content: center;
   gap: 10px;
-  padding: 12px 20px;
+  padding: 12px 16px;
   border-radius: 999px;
   font-size: 14px;
   font-weight: 600;
@@ -241,6 +242,13 @@ body {
     background-position 0.35s ease-out;
   background-size: 200% 100%;
   background-position: 0% 50%;
+  width: 100%;
+}
+
+@media (min-width: 600px) {
+  .heroPrimaryBtn {
+    width: auto;
+  }
 }
 
 .heroPrimaryBtn:hover {
@@ -264,7 +272,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 6px;
-  font-size: 13px;
+  font-size: 12px;
   color: var(--text-soft);
 }
 
@@ -331,14 +339,15 @@ body {
   height: 100%;
   border-radius: 999px;
   color: #f9fafb;
+  overflow: hidden;
+}
 
-  .heroImg {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;    /* заполняет круг без искажений */
-    display: block;
-    border-radius: 999px;
-  }
+.heroImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 999px;
 }
 
 .heroName {
@@ -402,12 +411,12 @@ body {
 /* ============= SECTIONS ============= */
 
 .section {
-  margin-bottom: 52px;
+  margin-bottom: 44px;
 }
 
 .sectionAlt {
-  margin-bottom: 52px;
-  padding: 28px 18px 26px;
+  margin-bottom: 44px;
+  padding: 24px 16px 22px;
   border-radius: var(--radius-xl);
   background: radial-gradient(circle at top left, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 1));
   border: 1px solid rgba(148, 163, 184, 0.3);
@@ -415,7 +424,7 @@ body {
 
 .sectionHeader {
   max-width: 640px;
-  margin-bottom: 24px;
+  margin-bottom: 22px;
 }
 
 .sectionHeaderAlt {
@@ -424,7 +433,7 @@ body {
 
 .sectionTitle {
   margin: 0 0 8px;
-  font-size: 22px;
+  font-size: 20px;
   letter-spacing: -0.03em;
 }
 
@@ -755,6 +764,7 @@ body {
     background-position 0.35s ease-out;
   background-size: 200% 100%;
   background-position: 0% 50%;
+  width: 100%;
 }
 
 .submitBtn:hover:not(:disabled) {
@@ -843,5 +853,39 @@ body {
 @keyframes spin {
   to {
     transform: rotate(360deg);
+  }
+}
+
+/* ============= ДОПОЛНИТЕЛЬНАЯ МОБИЛЬНАЯ АДАПТАЦИЯ ============= */
+
+@media (max-width: 480px) {
+  .page {
+    padding-inline: 10px;
+  }
+
+  .heroTitle {
+    font-size: 26px;
+  }
+
+  .heroSubtitle {
+    font-size: 13px;
+  }
+
+  .sectionTitle {
+    font-size: 18px;
+  }
+
+  .featureCard,
+  .whyCard,
+  .formCardInner,
+  .contactBlock {
+    padding: 14px 12px 12px;
+  }
+
+  .heroStatText {
+    font-size: 8px;
+  }
+  .contactLayout {
+    gap: 16px;
   }
 }
