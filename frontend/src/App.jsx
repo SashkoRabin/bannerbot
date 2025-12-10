@@ -131,7 +131,6 @@ export default function App() {
               <br />
               <span>Блинов Михаил Сергеевич</span>
             </h1>
-
             <p className={styles.heroSubtitle}>
               Помогаю защищать права и интересы в сложных жизненных ситуациях:
               проблемы военнослужащих, споры с работодателем, семейные конфликты,
@@ -161,7 +160,6 @@ export default function App() {
               </div>
             </div>
           </div>
-
           <div className={styles.heroCard}>
             <div className={styles.heroCardInner}>
               <div className={styles.heroCardHeader}>
@@ -175,7 +173,10 @@ export default function App() {
                   </div>
                 </div>
                 <div>
-                  <div className={styles.heroName}>Блинов Михаил Сергеевич</div>
+                  <div className={styles.heroName}>
+                    Блинов Михаил Сергеевич
+                    <img className={styles.asotiation} src='/imaga.png' alt='' /> 
+                  </div>
                   <div className={styles.heroRole}>Практикующий юрист</div>
                 </div>
               </div>

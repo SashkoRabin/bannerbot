@@ -205,6 +205,14 @@ body {
   color: var(--text-muted);
 }
 
+.asotiation {
+  width: 56px;
+  height: 56px;
+  position: absolute;
+  top: 10px;
+  opacity: .5;
+}
+
 .heroActions {
   display: flex;
   flex-direction: column;
@@ -859,6 +867,9 @@ body {
 /* ============= ДОПОЛНИТЕЛЬНАЯ МОБИЛЬНАЯ АДАПТАЦИЯ ============= */
 
 @media (max-width: 480px) {
+  .asotiation {
+    display: none;
+  }
   .page {
     padding-inline: 10px;
   }
