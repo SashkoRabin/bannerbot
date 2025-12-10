@@ -12,6 +12,8 @@ import {
 import styles from './App.module.css';
 
 export default function App() {
+  const BACKEND_URL = 'https://bannerbot-7le0.onrender.com';
+
   const [formData, setFormData] = useState({
     fullName: '',
     phone: '',
@@ -71,7 +73,7 @@ export default function App() {
     setFormSuccess(false);
 
     try {
-      await fetch('http://localhost:5000/api/form/submit', {
+      await fetch(`${BACKEND_URL}/api/form/submit`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
