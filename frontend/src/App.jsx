@@ -55,9 +55,6 @@ export default function App() {
     if (formData.phone.replace(/\D/g, '').length < 11) {
       return 'Пожалуйста, введите корректный номер телефона.';
     }
-    if (formData.inn.trim().length < 10) {
-      return 'Пожалуйста, кратко опишите вашу ситуацию (минимум 10 символов).';
-    }
     return '';
   };
 
