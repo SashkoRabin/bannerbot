@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Scale,
   ShieldCheck,
@@ -8,6 +8,10 @@ import {
   Clock,
   Send,
   CheckCircle2,
+  Quote,
+  Star,
+  ChevronLeft,
+  ChevronRight,
 } from 'lucide-react';
 import styles from './App.module.css';
 
@@ -24,6 +28,123 @@ export default function App() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formError, setFormError] = useState('');
   const [formSuccess, setFormSuccess] = useState(false);
+
+  // ---- ДАННЫЕ ДЛЯ КАРУСЕЛИ ОТЗЫВОВ ----
+ const testimonials = [
+  {
+    name: 'Ольга Антонова',
+    role: 'трудовой спор',
+    text:
+      'После длительной задержки зарплаты обратилась к Михаилу. Он тщательно изучил документы, выстроил стратегию и уже через месяц работодатель полностью погасил долг. Впечатлил спокойный и уверенный подход.',
+    date: 'январь 2025',
+    rating: 5,
+    tag: 'Трудовое право',
+  },
+  {
+    name: 'Сергей Трофимов',
+    role: 'военнослужащий',
+    text:
+      'Нужно было восстановить законные выплаты после перевода. Михаил сразу понял суть проблемы, собрал доказательства и помог добиться пересмотра решения комиссии. Очень благодарен.',
+    date: 'октябрь 2024',
+    rating: 5,
+    tag: 'Военное право',
+  },
+  {
+    name: 'Анастасия Миронова',
+    role: 'семейный спор',
+    text:
+      'Сложное дело с определением места жительства ребёнка. Михаил вел переговоры аккуратно и профессионально, сохранил спокойствие в эмоциональной ситуации. Итог — решение в мою пользу.',
+    date: 'август 2024',
+    rating: 5,
+    tag: 'Семейное право',
+  },
+  {
+    name: 'Роман Ч.',
+    role: 'уголовное дело (защита)',
+    text:
+      'Попал в неприятную ситуацию и нуждался в защите на стадии следствия. Михаил помог подготовить позицию, участвовал в допросах и отстоял мои права. Дело закрыли — благодарю.',
+    date: 'июнь 2024',
+    rating: 5,
+    tag: 'Уголовная защита',
+  },
+  {
+    name: 'Лилия Воронова',
+    role: 'спор с работодателем',
+    text:
+      'Работодатель пытался уволить «по статье», чтобы избежать компенсаций. Юрист оперативно вмешался, документально опроверг доводы и помог восстановиться на работе. Очень рекомендую.',
+    date: 'март 2024',
+    rating: 4,
+    tag: 'Трудовые споры',
+  },
+  {
+    name: 'Денис Коваленко',
+    role: 'банковский спор',
+    text:
+      'Банк списывал скрытые комиссии по кредиту. Михаил грамотно составил претензию, помог собрать доказательства и вернул значительную часть средств. Приятно работать с профессионалом.',
+    date: 'январь 2024',
+    rating: 5,
+    tag: 'Банковские споры',
+  },
+  {
+    name: 'Вероника Андреева',
+    role: 'потребительский спор',
+    text:
+      'Компания-исполнитель отказалась исправлять некачественную работу. Михаил подготовил юридически грамотное обращение, и нам полностью вернули деньги. Всё быстро и вежливо.',
+    date: 'ноябрь 2023',
+    rating: 5,
+    tag: 'Защита прав потребителей',
+  },
+  {
+    name: 'Игорь Ж.',
+    role: 'спор по недвижимости',
+    text:
+      'Возник конфликт с продавцом по поводу скрытых дефектов жилья. Юрист доказал нарушение условий договора и помог добиться компенсации. Спасибо за внимательность и точность.',
+    date: 'октябрь 2023',
+    rating: 5,
+    tag: 'Недвижимость',
+  },
+  {
+    name: 'Татьяна К.',
+    role: 'семейный конфликт',
+    text:
+      'Было необходимо оформить соглашение и урегулировать имущественный вопрос. Михаил всё разъяснил простым языком, подготовил документы и помог прийти к мирному решению.',
+    date: 'август 2023',
+    rating: 5,
+    tag: 'Семейное право',
+  },
+  {
+    name: 'Александр Громов',
+    role: 'гражданский спор',
+    text:
+      'Спор с подрядчиком по неисполненному договору. Михаил грамотно выстроил доказательную базу, участвовал в переговорах — деньги были возвращены в полном объёме.',
+    date: 'июнь 2023',
+    rating: 5,
+    tag: 'Гражданские дела',
+  },
+];
+
+
+
+  const [currentReview, setCurrentReview] = useState(0);
+
+  const handleNextReview = () => {
+    setCurrentReview((prev) => (prev + 1) % testimonials.length);
+  };
+
+  const handlePrevReview = () => {
+    setCurrentReview((prev) =>
+      prev === 0 ? testimonials.length - 1 : prev - 1
+    );
+  };
+
+  // Автоматическая прокрутка карусели
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentReview((prev) => (prev + 1) % testimonials.length);
+    }, 20000); // раз в 8 секунд
+
+    return () => clearInterval(timer);
+  }, [testimonials.length]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -107,6 +228,8 @@ export default function App() {
     }
   };
 
+  const currentTestimonial = testimonials[currentReview];
+
   return (
     <div className={styles.app}>
       {/* Фон со свечением и сеткой */}
@@ -175,7 +298,11 @@ export default function App() {
                 <div>
                   <div className={styles.heroName}>
                     Блинов Михаил Сергеевич
-                    <img className={styles.asotiation} src='/imaga.png' alt='' /> 
+                    <img
+                      className={styles.asotiation}
+                      src="/imaga.png"
+                      alt=""
+                    />
                   </div>
                   <div className={styles.heroRole}>Практикующий юрист</div>
                 </div>
@@ -184,7 +311,9 @@ export default function App() {
               <div className={styles.heroCardBody}>
                 <div className={styles.heroStatRow}>
                   <div>
-                    <div className={styles.heroStatLabel}>Основные направления</div>
+                    <div className={styles.heroStatLabel}>
+                      Основные направления
+                    </div>
                     <div className={styles.heroStatValue}>
                       Трудовые, военные, семейные, гражданские, уголовные дела
                     </div>
@@ -209,7 +338,8 @@ export default function App() {
                 </div>
 
                 <div className={styles.heroFootnote}>
-                  *Показатель рассчитан на основе дел, завершённых за последние 3 года.
+                  *Показатель рассчитан на основе дел, завершённых за последние
+                  3 года.
                 </div>
               </div>
             </div>
@@ -298,10 +428,104 @@ export default function App() {
           </div>
         </section>
 
+        {/* БЛОК: ОТЗЫВЫ КЛИЕНТОВ (КАРУСЕЛЬ) */}
+        <section className={`${styles.section} ${styles.reviewsSection || ''}`}>
+          <div className={styles.sectionHeader}>
+            <h2 className={styles.sectionTitle}>Отзывы клиентов</h2>
+            <p className={styles.sectionSubtitle}>
+              Часть людей, которые уже прошли со мной сложные ситуации и смогли
+              защитить свои права.
+            </p>
+          </div>
+
+          <div className={styles.reviewsShell}>
+            <button
+              type="button"
+              className={styles.reviewsNavButton}
+              onClick={handlePrevReview}
+              aria-label="Предыдущий отзыв"
+            >
+              <ChevronLeft className={styles.reviewsNavIcon} />
+            </button>
+
+            <article className={styles.reviewsCard}>
+              <div className={styles.reviewsQuoteMark}>
+                <Quote className={styles.reviewsQuoteIcon} />
+              </div>
+
+              <div className={styles.reviewsTagRow}>
+                <span className={styles.reviewsTag}>
+                  {currentTestimonial.tag}
+                </span>
+                <span className={styles.reviewsDate}>
+                  {currentTestimonial.date}
+                </span>
+              </div>
+
+              <p className={styles.reviewsText}>{currentTestimonial.text}</p>
+
+              <div className={styles.reviewsFooter}>
+                <div className={styles.reviewsClient}>
+                  <div className={styles.reviewsAvatarStub}>
+                    {currentTestimonial.name[0]}
+                  </div>
+                  <div>
+                    <div className={styles.reviewsName}>
+                      {currentTestimonial.name}
+                    </div>
+                    <div className={styles.reviewsMeta}>
+                      {currentTestimonial.role}
+                    </div>
+                  </div>
+                </div>
+
+                <div className={styles.reviewsRating}>
+                  {Array.from({ length: currentTestimonial.rating }).map(
+                    (_, i) => (
+                      <Star
+                        key={i}
+                        className={styles.reviewsStar}
+                        aria-hidden="true"
+                      />
+                    )
+                  )}
+                </div>
+              </div>
+            </article>
+
+            <button
+              type="button"
+              className={styles.reviewsNavButton}
+              onClick={handleNextReview}
+              aria-label="Следующий отзыв"
+            >
+              <ChevronRight className={styles.reviewsNavIcon} />
+            </button>
+          </div>
+
+          <div className={styles.reviewsDots}>
+            {testimonials.map((_, index) => (
+              <button
+                key={index}
+                type="button"
+                className={
+                  index === currentReview
+                    ? styles.reviewsDotActive
+                    : styles.reviewsDot
+                }
+                onClick={() => setCurrentReview(index)}
+                aria-label={`Показать отзыв ${index + 1}`}
+              />
+            ))}
+          </div>
+        </section>
+
         {/* БЛОК: КОНТАКТЫ + ФОРМА */}
         <section className={styles.section} id="contact-form">
           <div className={styles.sectionHeader}>
-            <h2 className={styles.sectionTitle}>Оставьте заявку на консультацию</h2>
+            <h2 className={styles.sectionTitle}>
+              Оставьте заявку на консультацию
+            </h2>
             <p className={styles.sectionSubtitle}>
               Опишите вашу ситуацию — я изучу вопрос и предложу возможные пути
               решения. Первичный разбор и ориентировочная стратегия — бесплатно.
@@ -374,7 +598,8 @@ export default function App() {
 
                   <div className={styles.formField}>
                     <label className={styles.formLabel}>
-                      Номер телефона <span className={styles.formRequired}>*</span>
+                      Номер телефона{' '}
+                      <span className={styles.formRequired}>*</span>
                     </label>
                     <input
                       type="tel"
@@ -402,13 +627,16 @@ export default function App() {
                     />
                   </div>
 
-                  {formError && <div className={styles.formError}>{formError}</div>}
+                  {formError && (
+                    <div className={styles.formError}>{formError}</div>
+                  )}
 
                   {formSuccess && (
                     <div className={styles.formSuccess}>
                       <CheckCircle2 className={styles.formSuccessIcon} />
                       <span>
-                        Заявка отправлена. Я свяжусь с вами в ближайшее рабочее время.
+                        Заявка отправлена. Я свяжусь с вами в ближайшее рабочее
+                        время.
                       </span>
                     </div>
                   )}
@@ -442,11 +670,15 @@ export default function App() {
         <footer className={styles.footer}>
           <div className={styles.footerInner}>
             <div className={styles.footerBrand}>
-              <span className={styles.footerName}>Блинов Михаил Сергеевич</span>
+              <span className={styles.footerName}>
+                Блинов Михаил Сергеевич
+              </span>
               <span className={styles.footerRole}>Юридическая помощь</span>
             </div>
             <div className={styles.footerMeta}>
-              <span>© 2014 - {new Date().getFullYear()} Все права защищены.</span>
+              <span>
+                © 2014 - {new Date().getFullYear()} Все права защищены.
+              </span>
               <span className={styles.footerDot}>•</span>
               <span>Информация на сайте не является публичной офертой.</span>
             </div>
