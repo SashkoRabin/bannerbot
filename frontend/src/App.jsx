@@ -167,7 +167,7 @@ export default function App() {
                   <div className={styles.heroAvatarInitials}>
                     <img
                       className={styles.heroImg}
-                      src="https://static8.depositphotos.com/1002026/936/i/450/depositphotos_9365427-stock-photo-lawyer-on-his-workplace.jpg"
+                      src="image.jpg"
                       alt="Блинов Михаил Сергеевич"
                     />
                   </div>
